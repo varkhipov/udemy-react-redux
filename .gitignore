@@ -1,0 +1,10 @@
+### Global ignore rules
+*~
+.DS_Store
+*.iml
+.idea
+target
+
+### Node ignore rules
+.npm
+node_modules/

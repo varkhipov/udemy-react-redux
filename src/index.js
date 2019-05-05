@@ -1,28 +1,42 @@
 // import React and ReactDOM libs
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Faker from 'faker';
-import Comment from './Comment';
-import ApprovalCard from './ApprovalCard';
 
 // create React Component
-function App() {
-  return (
-    <div className="ui container comments" style={{marginTop: "5px"}}>
-      <ApprovalCard>
-        <div>
-          <h4>Warning</h4>
-          Are you sure?
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // the only time where direct assignment is done, otherwise this.setState({}) should be used
+    this.state = { lat: null, errorMessage: '' };
+
+    navigator.geolocation.getCurrentPosition(
+      position => this.setState({ lat: position.coords.latitude }),
+      error => this.setState({ errorMessage: error.message })
+    );
+  }
+
+  render() {
+    if (this.state.errorMessage && !this.state.lat) {
+      return (
+        <div className="ui container comments" style={{ marginTop: "5px" }}>
+          Error: { this.state.errorMessage }
         </div>
-      </ApprovalCard>
-      <ApprovalCard>
-        <Comment avatar={Faker.image.avatar()}
-                 author="Jack"
-                 timeAgo="Today at 6:00PM"
-                 content="Some blog post"/>
-      </ApprovalCard>
-    </div>
-  )
+      )
+    }
+    if (!this.state.errorMessage && this.state.lat) {
+      return (
+        <div className="ui container comments" style={{ marginTop: "5px" }}>
+          Latitude: { this.state.lat }
+        </div>
+      )
+    }
+    return (
+      <div className="ui container comments" style={{ marginTop: "5px" }}>
+        Loading...
+      </div>
+    )
+  }
 }
 
 // Take React Component and show in on the screen

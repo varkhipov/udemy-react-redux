@@ -1,6 +1,7 @@
 // import React and ReactDOM libs
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from './Container';
 
 // create React Component
 class App extends React.Component {
@@ -19,22 +20,16 @@ class App extends React.Component {
   render() {
     if (this.state.errorMessage && !this.state.lat) {
       return (
-        <div className="ui container comments" style={{ marginTop: "5px" }}>
-          Error: { this.state.errorMessage }
-        </div>
+        <Container>Error: { this.state.errorMessage }</Container>
       )
     }
     if (!this.state.errorMessage && this.state.lat) {
       return (
-        <div className="ui container comments" style={{ marginTop: "5px" }}>
-          Latitude: { this.state.lat }
-        </div>
+        <Container>Latitude: { this.state.lat }</Container>
       )
     }
     return (
-      <div className="ui container comments" style={{ marginTop: "5px" }}>
-        Loading...
-      </div>
+      <Container>Loading...</Container>
     )
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Container(props) {
+const Container = ({ children }) => {
   return (
-    <div className="ui container" style={{ marginTop: "5px" }}>
-      {props.children}
+    <div className="ui container" style={ { marginTop: "5px" } }>
+      { children }
     </div>
   );
-}
+};
 
 export default Container;

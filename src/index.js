@@ -2,15 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Container from './Container';
+import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 // create React Component
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  state = { lat: null, errorMessage: '' };
 
-    // the only time where direct assignment is done, otherwise this.setState({}) should be used
-    this.state = { lat: null, errorMessage: '' };
-
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => this.setState({ lat: position.coords.latitude }),
       error => this.setState({ errorMessage: error.message })
@@ -20,16 +19,20 @@ class App extends React.Component {
   render() {
     if (this.state.errorMessage && !this.state.lat) {
       return (
-        <Container>Error: { this.state.errorMessage }</Container>
+        <Container>
+          Error: { this.state.errorMessage }
+        </Container>
       )
     }
     if (!this.state.errorMessage && this.state.lat) {
       return (
-        <Container>Latitude: { this.state.lat }</Container>
+        <Container>
+          <SeasonDisplay lat={ this.state.lat }/>
+        </Container>
       )
     }
     return (
-      <Container>Loading...</Container>
+      <Spinner message="Waiting location data..."/>
     )
   }
 }

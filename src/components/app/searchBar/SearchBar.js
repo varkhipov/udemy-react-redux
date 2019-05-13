@@ -16,14 +16,14 @@ class SearchBar extends Component {
     // Arrow function in 'onSubmit' could be used to handle 'this' correctly via automatic binding
     return (
       <div className="ui segment">
-        <form className="ui form" onSubmit={ (e) => this.onFormSubmit(e) }>
+        <form className="ui form" onSubmit={e => this.onFormSubmit(e)}>
           <div className="field">
             <label htmlFor="search">Image Search:</label>
             <input id="search"
                    placeholder="Search something..."
                    type="text"
-                   value={ this.state.searchString }
-                   onChange={ e => this.setState({ searchString: e.target.value }) }
+                   value={this.state.searchString}
+                   onChange={e => this.setState({ searchString: e.target.value })}
             />
           </div>
         </form>

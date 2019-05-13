@@ -1,22 +1,19 @@
+import './ImageList.css';
 import React from 'react';
+import ImageCard from './imageCard/ImageCard';
 
 const ImageList = (props) => {
   console.log(props.images);
 
-  const images = props.images.map(({ description, id, urls }) => {
+  const images = props.images.map((image) => {
     return (
-      <img className="ui small spaced image"
-           key={ id }
-           src={ urls.regular }
-           alt={ description } />
+      <ImageCard key={image.id} image={image} />
     )
   });
 
-  const wrapperDivStyle = props.images.length > 0 ? "ui segment" : "";
-
   return (
-    <div className={ wrapperDivStyle }>
-      { images }
+    <div className="image-list">
+      {images}
     </div>
   );
 };

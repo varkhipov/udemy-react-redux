@@ -22,9 +22,9 @@ class App extends Component {
     return (
       <Container>
         <div>
-          <SearchBar onSubmit={ this.onSearchBarSubmit } />
-          { this.state.images.length } images found.
-          <ImageList images={ this.state.images } />
+          <SearchBar onSubmit={this.onSearchBarSubmit} />
+          {this.state.images.length} images found.
+          <ImageList images={this.state.images} />
         </div>
       </Container>
     );

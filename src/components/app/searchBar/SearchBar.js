@@ -7,12 +7,6 @@ class SearchBar extends Component {
   //   Object.entries(e).forEach((entry) => console.log(entry));
   // }
 
-  // Arrow function could be used to handle 'this' correctly via automatic binding
-  // onFormSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(this.state.searchString);
-  // };
-
   onFormSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state.searchString);

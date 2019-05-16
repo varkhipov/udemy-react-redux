@@ -3,27 +3,25 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
   state = { searchString: '' };
 
-  // onInputChange(e) {
-  //   Object.entries(e).forEach((entry) => console.log(entry));
-  // }
+  onInputChange = (e) => {
+    this.setState({ searchString: e.target.value });
+  };
 
-  onFormSubmit(e) {
+  onFormSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.searchString);
+    this.props.onFormSubmit(this.state.searchString);
   };
 
   render() {
-    // Arrow function in 'onSubmit' could be used to handle 'this' correctly via automatic binding
     return (
-      <div className="ui segment">
-        <form className="ui form" onSubmit={e => this.onFormSubmit(e)}>
+      <div className="ui segment search-bar">
+        <form className="ui form" onSubmit={this.onFormSubmit}>
           <div className="field">
-            <label htmlFor="search">Image Search:</label>
-            <input id="search"
-                   placeholder="Search something..."
-                   type="text"
+            <label>Search video:</label>
+            <input type="text"
+                   placeholder="Type search string..."
                    value={this.state.searchString}
-                   onChange={e => this.setState({ searchString: e.target.value })}
+                   onChange={this.onInputChange}
             />
           </div>
         </form>

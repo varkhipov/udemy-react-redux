@@ -1,55 +1,21 @@
-import React, { Component } from 'react';
-import Container from '../container/Container';
-import SearchBar from './searchBar/SearchBar';
-import YouTube from '../../api/YouTube';
-import VideoList from './videoList/VideoList';
-import VideoDetail from './videoDetail/VideoDetail';
+import React from 'react';
+import ContainerGrid from '../container/ContainerGrid';
+import SongList from '../songList/SongList';
+import SongDetail from '../songDetail/SongDetail';
 
-class App extends Component {
-  state = { videos: [], selectedVideo: null };
-
-  componentDidMount() {
-    this.onSearchSubmit('Hello world!');
-  }
-
-  onSearchSubmit = async searchString => {
-    const response = await YouTube.get('/search', {
-        params: {
-          type: 'video',
-          q: searchString
-        }
-      }
-    );
-
-    this.setState({
-      videos: response.data.items,
-      selectedVideo: response.data.items[0]
-    });
-  };
-
-  onVideoSelect = video => {
-    this.setState({ selectedVideo: video })
-  };
-
-  render() {
-    return (
-      <Container>
-        <div className="ui container">
-          <SearchBar onFormSubmit={this.onSearchSubmit} />
-          <div className="ui grid">
-            <div className="ui row">
-              <div className="ten wide column">
-                <VideoDetail video={this.state.selectedVideo} />
-              </div>
-              <div className="six wide column">
-                <VideoList videos={this.state.videos} onVideoSelect={this.onVideoSelect} />
-              </div>
-            </div>
-          </div>
+const App = () => {
+  return (
+    <ContainerGrid>
+      <div className="ui row">
+        <div className="column eight wide">
+          <SongList />
         </div>
-      </Container>
-    );
-  }
-}
+        <div className="column eight wide">
+          <SongDetail />
+        </div>
+      </div>
+    </ContainerGrid>
+  );
+};
 
 export default App;

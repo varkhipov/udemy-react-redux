@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
+import postsReducer from './PostsReducer'
+import usersReducer from './UsersReducer'
 
 export default combineReducers({
-  reducerStub: () => 'reducerStub'
+  posts: postsReducer,
+  users: usersReducer
 });

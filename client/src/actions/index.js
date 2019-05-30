@@ -32,7 +32,7 @@ export const fetchStreams = () => async dispatch => {
   dispatch({
     type: types.FETCH_STREAMS,
     payload: response.data
-  })
+  });
 };
 
 
@@ -41,16 +41,20 @@ export const fetchStream = streamId => async dispatch => {
   dispatch({
     type: types.FETCH_STREAM,
     payload: response.data
-  })
+  });
 };
 
-
+// some REST APIs consider:
+// PUT - for updating ALL properties
+// PATCH - for updating SOME properties
+// in this particular case if 'json-server' receives PUT request - it replaces object with the new one
 export const editStream = (streamId, formValues) => async dispatch => {
-  const response = await streams.put('/streams/' + streamId, formValues);
+  const response = await streams.patch('/streams/' + streamId, formValues);
   dispatch({
     type: types.EDIT_STREAM,
     payload: response.data
-  })
+  });
+  history.push('/');
 };
 
 
@@ -59,5 +63,5 @@ export const deleteStream = streamId => async dispatch => {
   dispatch({
     type: types.DELETE_STREAM,
     payload: streamId
-  })
+  });
 };

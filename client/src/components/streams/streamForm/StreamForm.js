@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createStream } from '../../actions';
 
 
-class StreamCreate extends Component {
+class StreamForm extends Component {
   // formProps -> { input, meta }
   // if <Field> contains custom props, these props are added as they are (example: label prop)
   renderInput = ({ input, meta, label }) => {
@@ -29,9 +27,8 @@ class StreamCreate extends Component {
     }
   }
 
-  // create stream in api server database
   onSubmit = (formValues) => {
-    this.props.createStream(formValues);
+    this.props.onSubmit(formValues);
   };
 
   render() {
@@ -60,15 +57,7 @@ const validateForm = (formValues) => {
   return errors;
 };
 
-// keep wrapper separately to give code more readability
-const reduxFormWrapper = reduxForm({
-  form: 'streamCreate',
+export default reduxForm({
+  form: 'streamForm',
   validate: validateForm
-})(StreamCreate);
-
-// use both redux-form with it's embedded actions/reducers (wired inside a wrapper via redux-form.reduxForm() )
-// and our custom redux actions/reducers (wired here via react-redux.connect() )
-export default connect(
-  null,
-  { createStream }
-)(reduxFormWrapper);
+})(StreamForm);

@@ -5,5 +5,5 @@ Repo for course from Udemy: "Modern React with Redux"
 
 ---
 
-During this course several apps were built. 
+Several apps were built during this course.
 In this repo they are split into separate branches.
